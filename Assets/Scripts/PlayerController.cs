@@ -19,21 +19,22 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        //animator = GetComponent<Animator>(); // Get Animator component
+        animator = GetComponent<Animator>(); // Get Animator component
     }
 
     void Update()
     {
         Move();
         Jump();
-        // UpdateAnimator(); // No longer needed for jump trigger
+        Melee();
+        Shoot();
     }
 
     void Move()
     {
         float moveInput = Input.GetAxis("Horizontal");
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
-        //animator.SetFloat("speed", Mathf.Abs(moveInput));
+        animator.SetFloat("speed", Mathf.Abs(moveInput));
     }
 
     void Jump()
@@ -52,14 +53,32 @@ public class PlayerController : MonoBehaviour
             if (isGrounded)
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-                //animator.SetTrigger("Jump"); // Use trigger
+                animator.SetTrigger("Jump");
             }
             else if (canDoubleJump)
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
                 canDoubleJump = false;
-                //animator.SetTrigger("Jump"); // Use trigger
+                animator.SetTrigger("Jump");
             }
+        }
+    }
+
+    void Melee()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            animator.SetTrigger("Melee");
+            // Add melee logic here (e.g., damage enemies in range)
+        }
+    }
+
+    void Shoot()
+    {
+        if (Input.GetButtonDown("Fire2"))
+        {
+            animator.SetTrigger("Shoot");
+            // Add shooting logic here (e.g., instantiate projectile)
         }
     }
 }
