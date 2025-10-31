@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>(); // Get Animator component
+        //animator = GetComponent<Animator>(); // Get Animator component
     }
 
     void Update()
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
     {
         float moveInput = Input.GetAxis("Horizontal");
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
-        animator.SetFloat("speed", Mathf.Abs(moveInput));
+        //animator.SetFloat("speed", Mathf.Abs(moveInput));
     }
 
     void Jump()
@@ -52,13 +52,13 @@ public class PlayerController : MonoBehaviour
             if (isGrounded)
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
-                animator.SetTrigger("Jump"); // Use trigger
+                //animator.SetTrigger("Jump"); // Use trigger
             }
             else if (canDoubleJump)
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
                 canDoubleJump = false;
-                animator.SetTrigger("Jump"); // Use trigger
+                //animator.SetTrigger("Jump"); // Use trigger
             }
         }
     }
